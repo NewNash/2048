@@ -1,26 +1,97 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import React from 'react';
+import Board from "./board";
+import order from './action'
+import {connect} from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// let App = ({dispatch})=>{
+//   function handleKeydown(e) {
+//     switch(e.keyCode){
+//        case 37:
+//          dispatch(order('left'))
+//          break;
+//        case 38:
+//          dispatch(order('up'))
+//          break;
+//        case 39:
+//          dispatch(order('right'))
+//          break;
+//        case 40:
+//          dispatch(order('down'))
+//          break;
+//        default:
+//          console.log(`${e.key}的keycode是${e.keyCode}`)
+//      }
+//   }
+//   window.addEventListener('keydown',handleKeydown)
+//   return(
+//         <div>
+//             <Board />
+//         </div>
+//     )
+// }
+
+// class App extends React.Component{
+//   constructor(props){
+//     super(props)
+//     this.handleKeydown = this.handleKeydown.bind(this)
+//   }
+//   handleKeydown(e){
+//     const {dispatch} = this.props
+//      switch(e.keyCode){
+//        case 37:
+//          dispatch(order('left'))
+//          break;
+//        case 38:
+//          dispatch(order('up'))
+//          break;
+//        case 39:
+//          dispatch(order('right'))
+//          break;
+//        case 40:
+//          dispatch(order('down'))
+//          break;
+//        default:
+//          console.log(`${e.key}的keycode是${e.keyCode}`)
+//      }
+//   }
+//   componentDidMount() {
+//     window.addEventListener('keydown',this.handleKeydown)
+//   }
+//   componentWillUnmount() {
+//     window.removeEventListener('keydown',this.handleKeydown)
+//   }
+  // render() {
+  //   return(
+  //       <div>
+  //           <Board numbers='23'/>
+  //       </div>
+  //   )
+  // }
+// }
+
+function directionDispatch(e,dispatch) {
+  switch(e.keyCode){
+    case 37:
+      dispatch(order('left'))
+      break;
+    case 38:
+      dispatch(order('up'))
+      break;
+    case 39:
+      dispatch(order('right'))
+      break;
+    case 40:
+      dispatch(order('down'))
+      break;
+    default:
+      break;
+  }
 }
+const mapStateToProps = state=>({numbers:state.numbers})
 
+const mapDispatchToProps = dispatch=>({
+      handleKeydown:(e)=>{directionDispatch(e,dispatch)}
+    }
+)
+const App = connect(mapStateToProps,mapDispatchToProps)(Board)
 export default App;
