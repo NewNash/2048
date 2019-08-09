@@ -3,19 +3,17 @@
 
 //  按 上键 =》 先 判断是否可向上，在进行去零、合并
 //  其他也如此
+
+//数组，对象，函数 的值 传入函数中，原来的值会改变
+const initNumbers = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 const reducer = (state = {
-    numbers: [
-        [0, 2, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
-    score:0,//数组，对象，函数 的值 传入函数中，原来的值会改变
+    numbers:initNumbers,
+    score:0,
     ifGameOver:false
 }, action) => {
+    const newState = JSON.parse(JSON.stringify(state));
     switch (action.type) {
         case 'move':
-                const newState = JSON.parse(JSON.stringify(state))
                 switch (action.text) {
                     case 'up':
                         ToUp(newState)
@@ -41,8 +39,7 @@ const reducer = (state = {
                         return {...state, ...newState}
                 }
         case 'init':
-            console.log('init')
-            return state
+            return {...state,numbers:initBoard(),score:0 }
         case 'cancle':
             console.log('cancle')
             return state
@@ -59,7 +56,7 @@ export default reducer
 function createRandNumber(state,newState){
     for(let x=0;x<4;x++){
         for(let y=0;y<4;y++){
-            //判断是有有变化，有则生成随机数
+            //判断是有否变化，有则生成随机数
             if(state['numbers'][x][y]!==newState['numbers'][x][y]){
                 const arr=[]
                 for(let m=0;m<4;m++){
@@ -76,7 +73,14 @@ function createRandNumber(state,newState){
         }
     }
 }
-
+//初始状态，生成一个随机数
+function initBoard() {
+    const arr = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    const a = Math.floor(Math.random()*arr.length)
+    const b = Math.floor(Math.random()*arr.length)
+    arr[a][b]=Math.random()>0.1?2:4
+    return arr
+}
 //判断是否游戏结束
 function checkOver(newState){
     //若有 0 ，未结束，退出函数

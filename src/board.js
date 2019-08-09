@@ -4,6 +4,7 @@ import './static/board.css'
 class Board extends React.Component {
     componentDidMount() {
         window.addEventListener('keydown', this.props.handleKeydown)
+        this.props.initClick()
     }
 
     componentWillUnmount() {
