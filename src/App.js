@@ -1,6 +1,6 @@
 // import React from 'react';
 import Board from "./board";
-import order from './action'
+import {move} from './action'
 import {connect} from 'react-redux'
 
 // let App = ({dispatch})=>{
@@ -72,22 +72,26 @@ import {connect} from 'react-redux'
 function directionDispatch(e,dispatch) {
   switch(e.keyCode){
     case 37:
-      dispatch(order('left'))
+      dispatch(move('left'))
       break;
     case 38:
-      dispatch(order('up'))
+      dispatch(move('up'))
       break;
     case 39:
-      dispatch(order('right'))
+      dispatch(move('right'))
       break;
     case 40:
-      dispatch(order('down'))
+      dispatch(move('down'))
       break;
     default:
       break;
   }
 }
-const mapStateToProps = state=>({numbers:state.numbers})
+const mapStateToProps = state=>({
+  boards:state.numbers,
+  score:state.score,
+  ifGameOver:state.ifGameOver,
+})
 
 const mapDispatchToProps = dispatch=>({
       handleKeydown:(e)=>{directionDispatch(e,dispatch)}
