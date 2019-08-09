@@ -3,8 +3,6 @@
 
 //  按 上键 =》 先 判断是否可向上，在进行去零、合并
 //  其他也如此
-
-
 const reducer = (state = {
     numbers: [
         [0, 2, 0, 0],
@@ -15,36 +13,44 @@ const reducer = (state = {
     score:0,//数组，对象，函数 的值 传入函数中，原来的值会改变
     ifGameOver:false
 }, action) => {
-    if (action.type === 'move') {
-        const newState = JSON.parse(JSON.stringify(state))
-        switch (action.text) {
-            case 'up':
-                ToUp(newState)
-                createRandNumber(state,newState)
-                checkOver(newState)
-                return {...state,...newState}
-            case 'down':
-                ToDown(newState)
-                createRandNumber(state,newState)
-                checkOver(newState)
-                return {...state,...newState}
-            case 'left':
-                ToLeft(newState)
-                createRandNumber(state,newState)
-                checkOver(newState)
-                return {...state,...newState}
-            case 'right':
-                ToRight(newState)
-                createRandNumber(state,newState)
-                checkOver(newState)
-                return {...state,...newState}
-            default:
-                return {...state,...newState}
-        }
+    switch (action.type) {
+        case 'move':
+                const newState = JSON.parse(JSON.stringify(state))
+                switch (action.text) {
+                    case 'up':
+                        ToUp(newState)
+                        createRandNumber(state, newState)
+                        checkOver(newState)
+                        return {...state, ...newState}
+                    case 'down':
+                        ToDown(newState)
+                        createRandNumber(state, newState)
+                        checkOver(newState)
+                        return {...state, ...newState}
+                    case 'left':
+                        ToLeft(newState)
+                        createRandNumber(state, newState)
+                        checkOver(newState)
+                        return {...state, ...newState}
+                    case 'right':
+                        ToRight(newState)
+                        createRandNumber(state, newState)
+                        checkOver(newState)
+                        return {...state, ...newState}
+                    default:
+                        return {...state, ...newState}
+                }
+        case 'init':
+            console.log('init')
+            return state
+        case 'cancle':
+            console.log('cancle')
+            return state
+        default:
+            return state
+
     }
-    else {
-        return state
-    }
+
 }
 
 export default reducer

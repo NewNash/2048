@@ -3,72 +3,6 @@ import Board from "./board";
 import {move} from './action'
 import {connect} from 'react-redux'
 
-// let App = ({dispatch})=>{
-//   function handleKeydown(e) {
-//     switch(e.keyCode){
-//        case 37:
-//          dispatch(order('left'))
-//          break;
-//        case 38:
-//          dispatch(order('up'))
-//          break;
-//        case 39:
-//          dispatch(order('right'))
-//          break;
-//        case 40:
-//          dispatch(order('down'))
-//          break;
-//        default:
-//          console.log(`${e.key}的keycode是${e.keyCode}`)
-//      }
-//   }
-//   window.addEventListener('keydown',handleKeydown)
-//   return(
-//         <div>
-//             <Board />
-//         </div>
-//     )
-// }
-
-// class App extends React.Component{
-//   constructor(props){
-//     super(props)
-//     this.handleKeydown = this.handleKeydown.bind(this)
-//   }
-//   handleKeydown(e){
-//     const {dispatch} = this.props
-//      switch(e.keyCode){
-//        case 37:
-//          dispatch(order('left'))
-//          break;
-//        case 38:
-//          dispatch(order('up'))
-//          break;
-//        case 39:
-//          dispatch(order('right'))
-//          break;
-//        case 40:
-//          dispatch(order('down'))
-//          break;
-//        default:
-//          console.log(`${e.key}的keycode是${e.keyCode}`)
-//      }
-//   }
-//   componentDidMount() {
-//     window.addEventListener('keydown',this.handleKeydown)
-//   }
-//   componentWillUnmount() {
-//     window.removeEventListener('keydown',this.handleKeydown)
-//   }
-  // render() {
-  //   return(
-  //       <div>
-  //           <Board numbers='23'/>
-  //       </div>
-  //   )
-  // }
-// }
-
 function directionDispatch(e,dispatch) {
   switch(e.keyCode){
     case 37:
@@ -94,7 +28,9 @@ const mapStateToProps = state=>({
 })
 
 const mapDispatchToProps = dispatch=>({
-      handleKeydown:(e)=>{directionDispatch(e,dispatch)}
+      handleKeydown:(e)=>{directionDispatch(e,dispatch)},
+      initClick:()=>{dispatch({type:'init'})},
+      cancleClick:()=>{dispatch({type: 'cancle'})}
     }
 )
 const App = connect(mapStateToProps,mapDispatchToProps)(Board)

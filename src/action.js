@@ -3,4 +3,6 @@ export const move = direction=>({
     text:direction
 })
 
+
+// export const initClick =
 // export default action
