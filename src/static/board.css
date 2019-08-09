@@ -42,3 +42,11 @@
 .gameOver.hide{
     display: none;
 }
+.initBtn,.cancleBtn{
+    background: transparent;
+    border:1px solid #333;
+    border-radius: 3px;
+    margin: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}

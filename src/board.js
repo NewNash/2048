@@ -15,9 +15,9 @@ class Board extends React.Component {
         return (
             <div className="container">
                 <div>
-                    目前得分:<span className="score">{score}</span>
-                    <button onClick={initClick}>restart</button>
-                    <button onClick={cancleClick}>undo</button>
+                    score:<span className="score">{score}</span>
+                    <button onClick={initClick} className="initBtn">start</button>
+                    <button onClick={cancleClick} className="cancleBtn">undo</button>
                 </div>
                 <div className="BoardContainer">
 
